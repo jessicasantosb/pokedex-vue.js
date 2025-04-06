@@ -1,14 +1,18 @@
 <template>
-  <Home />
+  <Header />
+  <router-view></router-view>
+  <Footer />
 </template>
 
 <script>
-import Home from "./components/Home.vue";
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
   components: {
-    Home,
+    Header,
+    Footer,
   },
 };
 </script>
@@ -18,7 +22,7 @@ export default {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F8F4E1;
-  color: #4E1F00;
+  background-color: #f8f4e1;
+  color: #4e1f00;
 }
 </style>
