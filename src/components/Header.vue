@@ -1,6 +1,6 @@
 <template>
-  <header class="header">
-    <h3 class="title">Pokedex Vue.js</h3>
+  <header class="py-4 bg-light text-center border-bottom">
+    <p class="fw-bolder text-uppercase fs-3">Pokedex Vue.js</p>
   </header>
 </template>
 
@@ -10,19 +10,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.header {
-  background-color: #FEBA17;
-  padding-block: 2rem;
-  text-align: center;
-}
-.title {
-  color: #F8F4E1;
-  font-weight: bolder;
-  font-size: 1.5rem;
-  margin: 0;
-  letter-spacing: 10px;
-  text-transform: uppercase;
-  user-select: none;
-}
-</style>
+<style scoped></style>
