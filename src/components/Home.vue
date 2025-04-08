@@ -1,10 +1,11 @@
 <template>
   <main class="min-vh-100">
     <ul>
-      <li v-for="item in data" :key="item.id">
-        {{ item.name }}
-        <a href="/" target="_blank" rel="noopener noreferrer">ver mais</a>
-      </li>
+      <card-item
+        v-for="item in data"
+        :key="item.id"
+        :name="item.name"
+      ></card-item>
     </ul>
   </main>
 </template>

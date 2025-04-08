@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Pokemon page</p>
+    <p>pokemon page</p>
   </div>
 </template>
 

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import App from "./App.vue";
 
+import Card from "./components/Card.vue";
 import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Home from "./components/Home.vue";
@@ -29,6 +30,7 @@ const app = createApp(App);
 
 app.component("header-item", Header);
 app.component("footer-item", Footer);
+app.component("card-item", Card);
 
 app.use(router);
 app.mount("#app");
