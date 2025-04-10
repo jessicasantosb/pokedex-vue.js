@@ -73,6 +73,7 @@
 <script>
 import { getEvolutions } from "../api/getEvolutions";
 import { getPokemons } from "../api/getPokemons";
+import { filterPokemon } from "../lib/filterPokemon";
 
 export default {
   name: "HomePage",
@@ -115,10 +116,7 @@ export default {
     filterPokemonByName() {
       const query = this.$refs.queryName.value.toLowerCase();
       const allPokemon = this.pokemons;
-
-      const queryByName = allPokemon.filter(({ name }) =>
-        name.toLowerCase().includes(query)
-      );
+      const queryByName = filterPokemon("queryName", query, allPokemon);
 
       this.pokemons = queryByName;
       this.$refs.queryName.value = "";
@@ -127,8 +125,7 @@ export default {
     filterPokemonById() {
       const query = this.$refs.queryId.value.toLowerCase();
       const allPokemon = this.pokemons;
-
-      const queryById = allPokemon.filter(({ id }) => id.toString() === query);
+      const queryById = filterPokemon("queryId", query, allPokemon);
 
       this.pokemons = queryById;
       this.$refs.queryId.value = "";
@@ -137,12 +134,7 @@ export default {
     filterPokemonByType() {
       const query = this.$refs.queryType.value.toLowerCase();
       const allPokemon = this.pokemons;
-
-      const queryByType = allPokemon.filter(({ types }) => {
-        for (const type of types) {
-          return type.type.name.toLowerCase().includes(query);
-        }
-      });
+      const queryByType = filterPokemon("queryType", query, allPokemon);
 
       this.pokemons = queryByType;
       this.$refs.queryType.value = "";
@@ -151,10 +143,7 @@ export default {
     filterPokemonBySpecie() {
       const query = this.$refs.querySpecie.value.toLowerCase();
       const allPokemon = this.pokemons;
-
-      const queryBySpecies = allPokemon.filter(({ species }) =>
-        species.name.includes(query)
-      );
+      const queryBySpecies = filterPokemon("querySpecie", query, allPokemon);
 
       this.pokemons = queryBySpecies;
       this.$refs.querySpecie.value = "";
