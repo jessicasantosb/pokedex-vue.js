@@ -9,7 +9,7 @@
       <div class="card-body">
         <h5 class="card-title text-center">{{ pokemon.name }}</h5>
         <button @click="$emit('open-modal')" class="btn btn-primary">
-          Ver mais
+          mais detalhes
         </button>
       </div>
     </div>
