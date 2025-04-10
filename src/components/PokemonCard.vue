@@ -1,15 +1,17 @@
 <template>
-  <li>
-    <img :src="`assets/${pokemon.id}.png`" :alt="`${pokemon.name}`" />
-    <p>{{ pokemon.name }}</p>
-    <button v-on:click="openModal">ver mais</button>
-
-    <!-- on click open modal -->
-    <div class="modal hidden">
-      <!-- Todos os sprites do Pokémon
-           Seus movimentos de ataque
-           Evoluções do Pokémon (se houver)
-           Todos os games (game_indices) em que o Pokémon está presente -->
+  <li class="col-sm m-2 list-unstyled">
+    <div class="card" style="width: 18rem">
+      <img
+        class="card-img-top"
+        :src="`assets/${pokemon.id}.png`"
+        :alt="`${pokemon.name}`"
+      />
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ pokemon.name }}</h5>
+        <button @click="$emit('open-modal')" class="btn btn-primary">
+          Ver mais
+        </button>
+      </div>
     </div>
   </li>
 </template>
@@ -18,7 +20,7 @@
 export default {
   name: "PokemonCard",
   props: {
-    pokemon: {},
+    pokemon: Object,
   },
 };
 </script>
