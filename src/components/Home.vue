@@ -141,6 +141,7 @@ export default {
       );
 
       this.pokemons = queryByName;
+      this.$refs.queryName.value = "";
     },
 
     filterPokemonById() {
@@ -150,6 +151,7 @@ export default {
       const queryById = allPokemon.filter(({ id }) => id.toString() === query);
 
       this.pokemons = queryById;
+      this.$refs.queryId.value = "";
     },
 
     filterPokemonByType() {
@@ -163,6 +165,7 @@ export default {
       });
 
       this.pokemons = queryByType;
+      this.$refs.queryType.value = "";
     },
 
     filterPokemonBySpecie() {
@@ -174,6 +177,7 @@ export default {
       );
 
       this.pokemons = queryBySpecies;
+      this.$refs.querySpecie.value = "";
     },
   },
 };
