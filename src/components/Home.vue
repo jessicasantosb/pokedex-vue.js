@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { getPokemons } from "../api/getPokemons";
 
 export default {
   name: "HomePage",
@@ -85,36 +85,12 @@ export default {
     };
   },
   mounted() {
-    this.renderPokemon();
+    this.renderPokemons();
   },
   methods: {
-    async renderPokemon() {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=30&offset=0"
-        );
-
-        const promises = response.data.results.map((pokemon) =>
-          axios.get(pokemon.url).then((res) => res.data)
-        );
-
-        const data = await Promise.all(promises);
-
-        for (const pokemon of data) {
-          const response = await axios.get(
-            `https://pokeapi.co/api/v2/evolution-chain/${pokemon.id}/`
-          );
-
-          const data = response.data;
-          const pokemonEvolutions = data.chain.evolves_to[0].species;
-
-          this.evolutions = pokemonEvolutions;
-        }
-
-        this.pokemons = data;
-      } catch (error) {
-        console.error("RENDER_POKEMON: ", error);
-      }
+    async renderPokemons() {
+      const allPokemons = await getPokemons();
+      this.pokemons = allPokemons;
     },
 
     openModal(pokemon) {
