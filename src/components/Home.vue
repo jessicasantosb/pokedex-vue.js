@@ -16,7 +16,11 @@
       role="dialog"
       style="background-color: rgba(0, 0, 0, 0.5)"
     >
-      <pokemon-details :pokemon="selectedPokemon" @close-modal="closeModal" />
+      <pokemon-details
+        :pokemon="selectedPokemon"
+        :evolutions="evolutions"
+        @close-modal="closeModal"
+      />
     </div>
   </main>
 </template>
@@ -29,6 +33,7 @@ export default {
   data() {
     return {
       pokemons: [],
+      evolutions: [],
       showModal: false,
       selectedPokemon: null,
     };
@@ -48,6 +53,18 @@ export default {
         );
 
         const data = await Promise.all(promises);
+
+        for (const pokemon of data) {
+          const response = await axios.get(
+            `https://pokeapi.co/api/v2/evolution-chain/${pokemon.id}/`
+          );
+
+          const data = response.data;
+          const pokemonEvolutions = data.chain.evolves_to[0].species;
+
+          this.evolutions = pokemonEvolutions;
+        }
+
         this.pokemons = data;
       } catch (error) {
         console.error("RENDER_POKEMON: ", error);
