@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import { getEvolutions } from "../api/getEvolutions";
 import { getPokemons } from "../api/getPokemons";
 
 export default {
@@ -91,6 +92,9 @@ export default {
     async renderPokemons() {
       const allPokemons = await getPokemons();
       this.pokemons = allPokemons;
+
+      const allEvolutions = await getEvolutions();
+      this.evolutions = allEvolutions;
     },
 
     openModal(pokemon) {
