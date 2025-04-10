@@ -9,12 +9,14 @@
       />
     </ul>
 
-    <div class="modal bg-light">
-      <pokemon-details
-        v-if="showModal"
-        :pokemon="selectedPokemon"
-        @close-modal="closeModal"
-      />
+    <div
+      v-if="showModal"
+      class="modal d-block"
+      tabindex="-1"
+      role="dialog"
+      style="background-color: rgba(0, 0, 0, 0.5)"
+    >
+      <pokemon-details :pokemon="selectedPokemon" @close-modal="closeModal" />
     </div>
   </main>
 </template>

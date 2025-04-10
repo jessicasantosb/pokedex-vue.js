@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-dialog bg-danger">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{ pokemon.name }}</h5>
