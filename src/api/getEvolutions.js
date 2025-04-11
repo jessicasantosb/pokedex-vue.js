@@ -11,11 +11,22 @@ export const getEvolutions = async (selectedPokemon) => {
     const speciesData = speciesResponse.data;
 
     const evolutionResponse = await axios.get(speciesData.evolution_chain.url);
-    
+
     const data = evolutionResponse.data;
 
-    pokemonEvolutions.push(data.chain.evolves_to[0].species);
-    pokemonEvolutions.push(data.chain.evolves_to[0].evolves_to[0].species);
+    const firstEvolutionResponse = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${data?.chain?.evolves_to[0]?.species.name}`
+    );
+
+    const secondEvolutionResponse = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${data?.chain?.evolves_to[0]?.evolves_to[0]?.species.name}`
+    );
+
+    const firstEvolution = firstEvolutionResponse.data.sprites?.front_default;
+    const secondEvolution = secondEvolutionResponse.data.sprites?.front_default;
+
+    pokemonEvolutions.push(firstEvolution);
+    pokemonEvolutions.push(secondEvolution);
 
     return pokemonEvolutions;
   } catch (error) {
