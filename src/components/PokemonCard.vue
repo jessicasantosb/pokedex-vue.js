@@ -3,8 +3,8 @@
     <div class="card" style="width: 18rem">
       <img
         class="card-img-top"
-        :src="`assets/${pokemon.id}.png`"
-        :alt="`${pokemon.name}`"
+        :src="pokemon.sprites?.front_default"
+        :alt="pokemon.name"
       />
       <div class="card-body">
         <h5 class="card-title text-center">{{ pokemon.name }}</h5>
