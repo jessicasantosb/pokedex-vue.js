@@ -1,21 +1,24 @@
 import axios from "axios";
-import { getPokemons } from "./getPokemons";
 
-export const getEvolutions = async () => {
-  const data = await getPokemons();
+export const getEvolutions = async (selectedPokemon) => {
+  try {
+    let pokemonEvolutions = [];
 
-  for (const pokemon of data) {
-    try {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/evolution-chain/${pokemon.id}/`
-      );
+    const speciesResponse = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon-species/${selectedPokemon.id}`
+    );
 
-      const data = response.data;
-      const pokemonEvolutions = data.chain.evolves_to[0].species;
+    const speciesData = speciesResponse.data;
 
-      return pokemonEvolutions;
-    } catch (error) {
-      console.error("GET_EVOLUTIONS: ", error);
-    }
+    const evolutionResponse = await axios.get(speciesData.evolution_chain.url);
+    
+    const data = evolutionResponse.data;
+
+    pokemonEvolutions.push(data.chain.evolves_to[0].species);
+    pokemonEvolutions.push(data.chain.evolves_to[0].evolves_to[0].species);
+
+    return pokemonEvolutions;
+  } catch (error) {
+    console.error("GET_EVOLUTIONS: ", error);
   }
 };

@@ -29,21 +29,23 @@
         <!-- Seus movimentos de ataque -->
         <div>
           <h4 class="text-center text-muted pt-4 pb-2">Movimentos de ataque</h4>
-          <div v-for="move in pokemon.moves" :key="move.move.name" class="">
-            <div
-              v-for="moveDetail in move.version_group_details"
-              :key="moveDetail.version_group.name"
-              class="d-flex justify-content-between lh-1"
-              :class="moveDetail.level_learned_at === 0 && 'd-none'"
-            >
-              <p>
-                Nível:
-                <span>{{ moveDetail.level_learned_at }}</span>
-              </p>
-              <p>
-                Método:
-                <span>{{ moveDetail.move_learn_method.name }}</span>
-              </p>
+          <div style="height: 200px; overflow: scroll">
+            <div v-for="move in pokemon.moves" :key="move.move.name">
+              <div
+                v-for="moveDetail in move.version_group_details"
+                :key="moveDetail.version_group.name"
+                class="d-flex justify-content-between lh-1"
+                :class="moveDetail.level_learned_at === 0 && 'd-none'"
+              >
+                <p>
+                  Nível:
+                  <span>{{ moveDetail.level_learned_at }}</span>
+                </p>
+                <p>
+                  Método:
+                  <span>{{ moveDetail.move_learn_method.name }}</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -52,8 +54,13 @@
         <!-- Evoluções do Pokémon (se houver) -->
         <div>
           <h4 class="text-center text-muted pt-4 pb-2">Evoluções do Pokémon</h4>
-          <div lass="d-flex justify-content-between lh-1">
-            <p>{{ evolutions.name }}</p>
+        
+          <div
+            v-for="evolution in evolutions"
+            :key="evolution.id"
+            class="d-flex justify-content-between lh-1"
+          >
+            <p>{{ evolution.name }}</p>
           </div>
         </div>
         <hr />
@@ -63,13 +70,15 @@
           <h4 class="text-center text-muted pt-4 pb-2">
             Games em que o Pokémon está presente
           </h4>
-          <div
-            v-for="indices in pokemon.game_indices"
-            :key="indices.id"
-            class="d-flex justify-content-between lh-1"
-          >
-            <p>{{ indices.game_index }}</p>
-            <p>{{ indices.version.name }}</p>
+          <div style="height: 200px; overflow: scroll">
+            <div
+              v-for="indices in pokemon.game_indices"
+              :key="indices.id"
+              class="d-flex justify-content-between lh-1"
+            >
+              <p>{{ indices.game_index }}</p>
+              <p>{{ indices.version.name }}</p>
+            </div>
           </div>
         </div>
       </div>

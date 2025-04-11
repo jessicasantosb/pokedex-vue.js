@@ -45,12 +45,13 @@
       </button>
     </div>
 
-    <ul class="row">
+    <ul class="row" ref="pokemonList">
       <pokemon-card
-        v-for="pokemon in pokemons"
+        v-for="(pokemon, index) in pokemons"
         :key="pokemon.id"
         :pokemon="pokemon"
         @open-modal="openModal(pokemon)"
+        :ref="index === pokemons.length - 1 ? 'lastPokemon' : null"
       />
     </ul>
 
@@ -93,12 +94,11 @@ export default {
     async renderPokemons() {
       const allPokemons = await getPokemons();
       this.pokemons = allPokemons;
-
-      const allEvolutions = await getEvolutions();
-      this.evolutions = allEvolutions;
     },
 
-    openModal(pokemon) {
+    async openModal(pokemon) {
+      const allEvolutions = await getEvolutions(pokemon);
+      this.evolutions = allEvolutions;
       this.selectedPokemon = pokemon;
       this.showModal = true;
 
