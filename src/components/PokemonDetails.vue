@@ -52,9 +52,9 @@
         <hr />
 
         <!-- Evoluções do Pokémon (se houver) -->
-        <div>
+        <div v-if="evolutions.length">
           <h4 class="text-center text-muted pt-4 pb-2">Evoluções do Pokémon</h4>
-        
+
           <div
             v-for="evolution in evolutions"
             :key="evolution.id"
@@ -62,8 +62,8 @@
           >
             <p>{{ evolution.name }}</p>
           </div>
+          <hr />
         </div>
-        <hr />
 
         <!-- Todos os games (game_indices) em que o Pokémon está presente -->
         <div>
