@@ -45,73 +45,23 @@
       </button>
     </div>
 
-    <ul class="row" ref="pokemonList">
-      <pokemon-card
-        v-for="(pokemon, index) in pokemons"
-        :key="pokemon.id"
-        :pokemon="pokemon"
-        @open-modal="openModal(pokemon)"
-        :ref="index === pokemons.length - 1 ? 'lastPokemon' : null"
-      />
-    </ul>
-
-    <div
-      v-if="showModal"
-      class="modal d-block"
-      tabindex="-1"
-      role="dialog"
-      style="background-color: rgba(0, 0, 0, 0.5)"
-    >
-      <pokemon-details
-        :pokemon="selectedPokemon"
-        :evolutions="evolutions"
-        @close-modal="closeModal"
-      />
-    </div>
+    <Suspense>
+      <infinite-scroll />
+      <template #fallback>
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Carregando...</span>
+        </div>
+      </template>
+    </Suspense>
   </main>
 </template>
 
 <script>
-import { getEvolutions } from "../api/getEvolutions";
-import { getPokemons } from "../api/getPokemons";
 import { filterPokemon } from "../lib/filterPokemon";
 
 export default {
   name: "HomePage",
-  el: ".root",
-  data() {
-    return {
-      pokemons: [],
-      evolutions: [],
-      showModal: false,
-      selectedPokemon: null,
-    };
-  },
-  mounted() {
-    this.renderPokemons();
-  },
   methods: {
-    async renderPokemons() {
-      const allPokemons = await getPokemons();
-      this.pokemons = allPokemons;
-    },
-
-    async openModal(pokemon) {
-      const allEvolutions = await getEvolutions(pokemon);
-      this.evolutions = allEvolutions;
-      this.selectedPokemon = pokemon;
-      this.showModal = true;
-
-      console.log("open", this.showModal);
-    },
-
-    closeModal() {
-      this.showModal = false;
-      this.selectedPokemon = null;
-
-      console.log("close", this.showModal);
-    },
-
     // filtros para nome, ID, tipo e espécie
     filterPokemonByName() {
       const query = this.$refs.queryName.value.toLowerCase();

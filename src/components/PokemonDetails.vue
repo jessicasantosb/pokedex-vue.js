@@ -29,7 +29,7 @@
         <!-- Seus movimentos de ataque -->
         <div>
           <h4 class="text-center text-muted pt-4 pb-2">Movimentos de ataque</h4>
-          <div style="height: 200px; overflow: scroll">
+          <div style="height: 200px; overflow-y: scroll">
             <div v-for="move in pokemon.moves" :key="move.move.name">
               <div
                 v-for="moveDetail in move.version_group_details"
@@ -70,7 +70,7 @@
           <h4 class="text-center text-muted pt-4 pb-2">
             Games em que o Pokémon está presente
           </h4>
-          <div style="height: 200px; overflow: scroll">
+          <div style="height: 200px; overflow-y: scroll">
             <div
               v-for="indices in pokemon.game_indices"
               :key="indices.id"

@@ -6,6 +6,7 @@ import App from "./App.vue";
 import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Home from "./components/Home.vue";
+import InfiniteScroll from "./components/InfiniteScroll.vue";
 import PokemonCard from "./components/PokemonCard.vue";
 import PokemonDetails from "./components/PokemonDetails.vue";
 
@@ -28,6 +29,7 @@ app.component("header-item", Header);
 app.component("footer-item", Footer);
 app.component("pokemon-card", PokemonCard);
 app.component("pokemon-details", PokemonDetails);
+app.component("infinite-scroll", InfiniteScroll);
 
 app.use(router);
 app.mount("#app");
