@@ -22,12 +22,18 @@
         <!-- Todos os sprites do Pokémon -->
         <div class="py-4">
           <h4 class="text-center text-muted">Todos os sprites</h4>
-          <img
-            :src="pokemon.sprites?.front_default"
-            :alt="`${pokemon.name} sprite`"
-          />
+          <div class="d-flex justify-content-center">
+            <div v-for="sprite in sprites" :key="sprite">
+              <img
+                v-if="sprite"
+                :src="sprite"
+                :alt="`${pokemon.name} sprite`"
+                style="height: 60px; aspect-ratio: square"
+              />
+            </div>
+          </div>
+          <hr />
         </div>
-        <hr />
 
         <!-- Seus movimentos de ataque -->
         <div class="py-4">
@@ -57,12 +63,14 @@
         <!-- Evoluções do Pokémon (se houver) -->
         <div v-if="evolutions.length" class="py-4">
           <h4 class="text-center text-muted">Evoluções do Pokémon</h4>
-          <div
-            v-for="evolution in evolutions"
-            :key="evolution.id"
-            class="d-flex justify-content-center"
-          >
-            <img :src="evolution" alt="evolução do Pokemon" />
+          <div class="d-flex justify-content-center">
+            <div v-for="evolution in evolutions" :key="evolution.id">
+              <img
+                :src="evolution"
+                alt="evolução do Pokemon"
+                style="height: 60px; aspect-ratio: square"
+              />
+            </div>
           </div>
           <hr />
         </div>
@@ -97,6 +105,10 @@ export default {
       required: true,
     },
     evolutions: {
+      type: Array,
+      default: () => [],
+    },
+    sprites: {
       type: Array,
       default: () => [],
     },

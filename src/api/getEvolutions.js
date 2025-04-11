@@ -4,29 +4,37 @@ export const getEvolutions = async (selectedPokemon) => {
   try {
     let pokemonEvolutions = [];
 
-    const speciesResponse = await axios.get(
+    const speciesRes = await axios.get(
       `https://pokeapi.co/api/v2/pokemon-species/${selectedPokemon.id}`
     );
 
-    const speciesData = speciesResponse.data;
+    const evolutionRes = await axios.get(speciesRes.data.evolution_chain.url);
 
-    const evolutionResponse = await axios.get(speciesData.evolution_chain.url);
+    const secondSpecie = evolutionRes.data?.chain?.evolves_to[0]?.species.name;
+    const thirdSpecie =
+      evolutionRes.data?.chain?.evolves_to[0]?.evolves_to[0]?.species.name;
 
-    const data = evolutionResponse.data;
-
-    const firstEvolutionResponse = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${data?.chain?.evolves_to[0]?.species.name}`
+    const secondSpecieRes = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${secondSpecie}`
     );
 
-    const secondEvolutionResponse = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${data?.chain?.evolves_to[0]?.evolves_to[0]?.species.name}`
+    const thirdSpecieRes = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${thirdSpecie}`
     );
 
-    const firstEvolution = firstEvolutionResponse.data.sprites?.front_default;
-    const secondEvolution = secondEvolutionResponse.data.sprites?.front_default;
+    const secondEvolutionImg = secondSpecieRes.data.sprites?.front_default;
+    const thirdEvolutionImg = thirdSpecieRes.data.sprites?.front_default;
 
-    pokemonEvolutions.push(firstEvolution);
-    pokemonEvolutions.push(secondEvolution);
+    if (selectedPokemon.name === secondSpecie) {
+      pokemonEvolutions.push(thirdEvolutionImg);
+    }
+
+    if (
+      selectedPokemon.name !== secondSpecie &&
+      selectedPokemon.name !== thirdSpecie
+    ) {
+      pokemonEvolutions.push(secondEvolutionImg, thirdEvolutionImg);
+    }
 
     return pokemonEvolutions;
   } catch (error) {

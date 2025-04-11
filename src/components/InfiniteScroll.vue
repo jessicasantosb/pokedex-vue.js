@@ -52,6 +52,7 @@
       <pokemon-details
         :pokemon="selectedPokemon"
         :evolutions="evolutions"
+        :sprites="sprites"
         @close-modal="closeModal"
       />
     </div>
@@ -65,6 +66,7 @@ import { ref } from "vue";
 import { getEvolutions } from "../api/getEvolutions";
 import { getPokemons } from "../api/getPokemons";
 import { filterPokemon } from "../lib/filterPokemon";
+import { getSprites } from "../api/getSprites";
 
 export default {
   name: "InfiniteScroll",
@@ -72,6 +74,7 @@ export default {
     return {
       pokemons: [],
       evolutions: [],
+      sprites: [],
       showModal: false,
       selectedPokemon: null,
       fetchingData: false,
@@ -111,7 +114,9 @@ export default {
 
     async openModal(pokemon) {
       const allEvolutions = await getEvolutions(pokemon);
+      const allSprites = await getSprites(pokemon);
       this.evolutions = allEvolutions;
+      this.sprites = allSprites;
       this.selectedPokemon = pokemon;
       this.showModal = true;
     },
