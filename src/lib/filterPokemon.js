@@ -1,23 +1,16 @@
-export const filterPokemon = (ref, query, pokemons) => {
-  if (ref === "queryName") {
-    return pokemons.filter(({ name }) => {
-      return name.toLowerCase().includes(query.toLowerCase());
-    });
-  }
+export const filterPokemon = (query, pokemons) => {
+  return pokemons.reduce((acc, pokemon) => {
+    if (
+      pokemon.name.toLowerCase().includes(query) ||
+      pokemon.species.name.includes(query) ||
+      pokemon.id.toString() === query
+    ) {
+      acc.push(pokemon);
+    }
 
-  if (ref === "queryId") {
-    return pokemons.filter(({ id }) => id.toString() === query);
-  }
-
-  if (ref === "queryType") {
-    return pokemons.filter(({ types }) => {
-      for (const type of types) {
-        return type.type.name.toLowerCase().includes(query);
-      }
-    });
-  }
-
-  if (ref === "querySpecie") {
-    return pokemons.filter(({ species }) => species.name.includes(query));
-  }
+    for (const type of pokemon.types) {
+      if (type.type.name.toLowerCase().includes(query)) acc.push(pokemon);
+    }
+    return acc;
+  }, []);
 };

@@ -1,5 +1,17 @@
 <template>
   <div class="min-vh-100 container">
+    <div class="filter w-100 d-flex my-4">
+      <input
+        type="text"
+        ref="query"
+        class="w-75 p-2"
+        placeholder="filtre por nome, ID, tipo ou espécie"
+      />
+      <button type="button" v-on:click="handleFilter" class="w-25">
+        Procurar
+      </button>
+    </div>
+
     <div ref="pokemonList">
       <ul class="row">
         <pokemon-card
@@ -37,6 +49,7 @@ import { ref } from "vue";
 
 import { getEvolutions } from "../api/getEvolutions";
 import { getPokemons } from "../api/getPokemons";
+import { filterPokemon } from "../lib/filterPokemon";
 
 export default {
   name: "InfiniteScroll",
@@ -91,6 +104,15 @@ export default {
     closeModal() {
       this.showModal = false;
       this.selectedPokemon = null;
+    },
+
+    async handleFilter() {
+      const query = this.$refs.query.value.toLowerCase();
+      const allPokemon = this.pokemons
+      const filteredPokemons = filterPokemon(query, allPokemon);
+
+      this.pokemons = filteredPokemons;
+      this.$refs.query.value = "";
     },
   },
 };

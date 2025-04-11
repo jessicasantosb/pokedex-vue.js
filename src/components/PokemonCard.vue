@@ -1,6 +1,6 @@
 <template>
   <li class="col-sm m-2 list-unstyled">
-    <div class="card" style="width: 18rem">
+    <div class="card" style="width: 15rem">
       <img
         class="card-img-top"
         :src="pokemon.sprites?.front_default"
@@ -9,7 +9,7 @@
       <div class="card-body">
         <h5 class="card-title text-center">{{ pokemon.name }}</h5>
         <button @click="$emit('open-modal')" class="btn btn-primary">
-          mais detalhes
+          ver detalhes
         </button>
       </div>
     </div>
