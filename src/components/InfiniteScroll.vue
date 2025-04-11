@@ -1,5 +1,5 @@
 <template>
-  <div class="min-vh-100 container">
+  <div class="container" style="min-height: 100dvh">
     <div class="filter w-100 d-flex my-4">
       <input
         type="text"
@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <div ref="pokemonList">
+    <div ref="pokemonList" style="height: 90dvh; overflow-y: auto; overflow-x: hidden;">
       <ul class="row">
         <pokemon-card
           v-for="(pokemon, index) in pokemons"
