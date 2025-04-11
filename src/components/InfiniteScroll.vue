@@ -24,10 +24,7 @@
       </button>
     </div>
 
-    <div
-      ref="pokemonList"
-      style="height: 90dvh; overflow-y: auto; overflow-x: hidden"
-    >
+    <div>
       <ul class="row row-gap-5">
         <pokemon-card
           v-for="(pokemon, index) in pokemons"
@@ -37,7 +34,7 @@
           :ref="index === pokemons.length - 1 ? 'lastPokemon' : null"
         />
       </ul>
-      <div class="py-5 d-flex justify-content-center">
+      <div ref="pokemonList" class="py-5 d-flex justify-content-center">
         <div class="spinner-border" role="status" v-show="fetchingData" />
       </div>
     </div>
@@ -65,8 +62,8 @@ import { ref } from "vue";
 
 import { getEvolutions } from "../api/getEvolutions";
 import { getPokemons } from "../api/getPokemons";
-import { filterPokemon } from "../lib/filterPokemon";
 import { getSprites } from "../api/getSprites";
+import { filterPokemon } from "../lib/filterPokemon";
 
 export default {
   name: "InfiniteScroll",

@@ -10,30 +10,30 @@ export const getEvolutions = async (selectedPokemon) => {
 
     const evolutionRes = await axios.get(speciesRes.data.evolution_chain.url);
 
-    const secondSpecie = evolutionRes.data?.chain?.evolves_to[0]?.species.name;
-    const thirdSpecie =
+    const firstSpecie = evolutionRes.data?.chain?.evolves_to[0]?.species.name;
+    const secondSpecie =
       evolutionRes.data?.chain?.evolves_to[0]?.evolves_to[0]?.species.name;
+
+    const firstSpecieRes = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${firstSpecie}`
+    );
 
     const secondSpecieRes = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${secondSpecie}`
     );
 
-    const thirdSpecieRes = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${thirdSpecie}`
-    );
-
+    const firstEvolutionImg = firstSpecieRes.data.sprites?.front_default;
     const secondEvolutionImg = secondSpecieRes.data.sprites?.front_default;
-    const thirdEvolutionImg = thirdSpecieRes.data.sprites?.front_default;
 
-    if (selectedPokemon.name === secondSpecie) {
-      pokemonEvolutions.push(thirdEvolutionImg);
+    if (selectedPokemon.name === firstSpecie) {
+      pokemonEvolutions.push(secondEvolutionImg);
     }
 
     if (
-      selectedPokemon.name !== secondSpecie &&
-      selectedPokemon.name !== thirdSpecie
+      selectedPokemon.name !== firstSpecie &&
+      selectedPokemon.name !== secondSpecie
     ) {
-      pokemonEvolutions.push(secondEvolutionImg, thirdEvolutionImg);
+      pokemonEvolutions.push(firstEvolutionImg, secondEvolutionImg);
     }
 
     return pokemonEvolutions;

@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import App from "./App.vue";
 
-import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Home from "./components/Home.vue";
 import InfiniteScroll from "./components/InfiniteScroll.vue";
@@ -26,7 +25,6 @@ const router = createRouter({
 const app = createApp(App);
 
 app.component("header-item", Header);
-app.component("footer-item", Footer);
 app.component("pokemon-card", PokemonCard);
 app.component("pokemon-details", PokemonDetails);
 app.component("infinite-scroll", InfiniteScroll);

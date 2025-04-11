@@ -1,18 +1,15 @@
 <template>
   <Header />
   <router-view></router-view>
-  <Footer />
 </template>
 
 <script>
-import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 
 export default {
   name: "App",
   components: {
     Header,
-    Footer,
   },
 };
 </script>
@@ -23,7 +20,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffff;
-  color: #3674B5;
+  color: #3674b5;
 }
 button:hover {
   opacity: 90%;
