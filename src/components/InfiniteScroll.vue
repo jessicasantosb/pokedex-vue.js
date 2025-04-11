@@ -1,19 +1,34 @@
 <template>
   <div class="container" style="min-height: 100dvh">
-    <div class="filter w-100 d-flex my-4">
+    <div
+      class="my-5 mx-auto border shadow"
+      style="max-width: 700px; border-color: #3674b5"
+    >
       <input
         type="text"
         ref="query"
-        class="w-75 p-2"
+        class="w-75 p-2 border-0"
         placeholder="filtre por nome, ID, tipo ou espécie"
       />
-      <button type="button" v-on:click="handleFilter" class="w-25">
+      <button
+        type="button"
+        v-on:click="handleFilter"
+        class="btn btn-primary w-25 border-3"
+        style="
+          border-radius: 0;
+          border-color: #3674b5;
+          background-color: #3674b5;
+        "
+      >
         Procurar
       </button>
     </div>
 
-    <div ref="pokemonList" style="height: 90dvh; overflow-y: auto; overflow-x: hidden;">
-      <ul class="row">
+    <div
+      ref="pokemonList"
+      style="height: 90dvh; overflow-y: auto; overflow-x: hidden"
+    >
+      <ul class="row row-gap-5">
         <pokemon-card
           v-for="(pokemon, index) in pokemons"
           :key="pokemon.id"
@@ -108,7 +123,7 @@ export default {
 
     async handleFilter() {
       const query = this.$refs.query.value.toLowerCase();
-      const allPokemon = this.pokemons
+      const allPokemon = this.pokemons;
       const filteredPokemons = filterPokemon(query, allPokemon);
 
       this.pokemons = filteredPokemons;

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import Header from "./components/Header.vue";
 
 export default {
   name: "App",
@@ -22,7 +22,10 @@ export default {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f4e1;
-  color: #4e1f00;
+  background-color: #ffff;
+  color: #3674B5;
+}
+button:hover {
+  opacity: 90%;
 }
 </style>
