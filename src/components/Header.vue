@@ -1,14 +1,19 @@
 <template>
   <header class="p-4 bg-light text-center border-bottom">
-    <router-link to="/">
-      <p class="fw-bolder text-uppercase fs-3">Pokedex Vue.js</p>
-    </router-link>
+    <button type="button" v-on:click="reloadPage" class="btn btn-light fs-1">
+      Pokedex Vue.js
+    </button>
   </header>
 </template>
 
 <script>
 export default {
   name: "HeaderComponent",
+  methods: {
+    reloadPage() {
+      this.$router.go(this.$router.currentRoute);
+    },
+  },
 };
 </script>
 
